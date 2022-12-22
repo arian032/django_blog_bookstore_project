@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # my app
     'accounts',
     'pages',
+    'shop',
 ]
 
 MIDDLEWARE = [
@@ -150,4 +151,4 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-ACCOUNT_FORMS={'signup': 'accounts.forms.CustomUserCreationForm'}
+ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomUserCreationForm'}
