@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.urls import reverse_lazy
 
 from .models import Product
 
@@ -7,6 +8,11 @@ from .models import Product
 class ProductListView(generic.ListView):
     model = Product
     template_name = 'shop/product_list.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        active_product = self.model.objects.filter(active=True)
+        return active_product
 
 
 class ProductDetailView(generic.DetailView):
@@ -29,4 +35,4 @@ class ProductUpdateView(generic.UpdateView):
 class ProductDeleteView(generic.DeleteView):
     model = Product
     template_name = 'shop/product_delete.html'
-
+    success_url = reverse_lazy('home')

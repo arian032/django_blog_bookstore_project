@@ -1,1 +1,14 @@
-delete
+{% extends "_base.html" %}
+
+{% block title %}
+    Delete {{ product.title }}
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1>Do you want to Delete {{ product.title }}???</h1>
+    {#    <input type="submit" value="Yes Delete.">#}
+        <button type="submit">Yes Delete.</button>
+    </form>
+{% endblock %}
