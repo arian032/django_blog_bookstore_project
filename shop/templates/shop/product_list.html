@@ -1,12 +1,58 @@
-{% extends "_base.html" %}
+{% extends '_base.html' %}
+
 
 {% block title %}
-    List
+    لیست کتاب ها
 {% endblock %}
 
 {% block content %}
-    {% for product in products %}
-        <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
-    {% endfor %}
+    <div class="container mt-4">
+        <div class="row flex-row-reverse justify-content-md-center">
+            {% for product in products %}
 
-{% endblock %}
+            <div class="card m-2" style="max-width: 45%">
+                <div class="row g-0 h-100" dir="rtl">
+                    <div class="col-md-4">
+                        {% if product.cover %}
+                        <img src="{{ product.cover.url}}"
+                             class="img-fluid rounded-start" alt="...">
+{#                        {% else %}#}
+{#                            <img src="https://www.bing.com/images/search?view=detailV2&ccid=7fAwhaYY&id=51B232E66FAAA5BC05819484ADFAB3B29EABF079&thid=OIP.7fAwhaYYXaSPsI0hJ90MPwHaHa&mediaurl=https%3a%2f%2fpbs.twimg.com%2fprofile_images%2f715852271389655041%2fs-VdeDI5.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.edf03085a6185da48fb08d2127dd0c3f%3frik%3defCrnrKz%252bq2ElA%26pid%3dImgRaw%26r%3d0%26sres%3d1%26sresct%3d1%26srh%3d800%26srw%3d800&exph=500&expw=500&q=none&simid=607996000447578210&FORM=IRPRST&ck=41924870EC4C01327917E4D7F54902FE&selectedIndex=1"#}
+{#                             class="img-fluid rounded-start" alt="...">#}
+                        {% endif %}
+
+                    </div>
+                    <div class="col-md-8 h-100">
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="card-body">
+                                <a class="text-decoration-none" href="{{ product.get_absolute_url }}"> <h3 class="card-title"><strong>{{ product.title }}</strong></h3> </a>
+                                <p class="card-text pt-3"> {{ product.description|truncatewords:5 }}</p>
+                                <p class="text-muted">نویسنده: {{ product.author }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center mt-3">
+      {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% endif %}
+    <li class="page-item"><a class="page-link" href="">{{ page_obj.number }}</a></li>
+  {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+  {% endif %}
+  </ul>
+</nav>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center bg-grey">
+            <p>دوره آموزشی جنگو <a class="text-dark" href="https://codingyar.com/" target="_blank">کدینگ یار</a></p>
+        </div>
+    </footer>
+
+{% endblock content %}
